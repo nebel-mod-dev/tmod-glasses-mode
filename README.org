@@ -1,0 +1,6 @@
+* Glasses Mode
+This is a simple Terraria mod that adds one potion which makes buff display
+transparent.
+
+This mod aims to add a multitude of visual enhancements because modding can
+easily clutter the UI. Currently only supports the buff thing though.
