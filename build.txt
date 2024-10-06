@@ -1,0 +1,3 @@
+displayName = Glasses Mode
+author = Nebel
+version = 1.0

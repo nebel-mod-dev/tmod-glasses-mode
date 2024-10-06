@@ -1,0 +1,17 @@
+Mods: {
+	GlassesMode: {
+		Buffs: {
+			GlassesModeBuff: {
+				DisplayName: Glasses Mode Buff
+				Description: You can see clearly now
+			}
+		}
+
+		Items: {
+			GlassesModePotion: {
+				DisplayName: Glasses Mode Potion
+				Tooltip: Lets you see clearly
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+Adds a new potion which turns on glasses mode. Glasses mode lets you see a less cluttered HUD until it runs out or is cancelled.
