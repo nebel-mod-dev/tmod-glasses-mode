@@ -21,27 +21,29 @@ namespace GlassesMode.Content.Buffs
 			Main.LocalPlayer.GetModPlayer<GlassesModePlayer>().ResetEffects();
 			return true;
 		}
-
 	}
-	public class __DisableBuffDisplay : GlobalBuff
+
+	public class DisableBuffDisplay : GlobalBuff
 	{
-		/** 
-		 * if player is using the GlassesModeBuff, hide all other buffs
-		 *
-		 * @param type 
-		 * @param drawParams 
-		 *
-		 */
 		public override bool PreDraw(SpriteBatch spriteBatch, int type, int buffIndex, ref BuffDrawParams drawParams)
 		{
 			GlassesModePlayer player = Main.LocalPlayer.GetModPlayer<GlassesModePlayer>();
-			if (player.hasGlassesModeBuff) {
+			player.GlassesBuffToFront();
+			if (player.HasGlassesModeBuff) {
+				// only draw the glassesmode buff
 				if (type == ModContent.BuffType<GlassesModeBuff>()) {
+					player.GlassesBuffParams = drawParams;
 					return true;
 				}
+				// this hides the buff icon, remaining time text and mouse rectangle thus
+				// making it so that the buff completely vanishes but still remains active
+				drawParams.Position = player.GlassesBuffParams.Position;
+				drawParams.MouseRectangle = Rectangle.Empty;
+				drawParams.TextPosition = player.GlassesBuffParams.TextPosition;
+				drawParams.TextPosition.Y -= Main.screenHeight * 2;
 				return false;
 			}
-			return base.PreDraw(spriteBatch, type, buffIndex, ref drawParams);
+			return true;
 		}
 	}
 }
