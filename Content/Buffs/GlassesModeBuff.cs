@@ -13,8 +13,7 @@ namespace GlassesMode.Content.Buffs
 	{
 		public override void Update(Player player, ref int buffIndex)
 		{
-			// Use a ModPlayer to keep track of the buff being active
-			player.GetModPlayer<GlassesModePlayer>().ActivateBuff();
+			player.GetModPlayer<GlassesModePlayer>().ActivateEffects();
 		}
 		public override bool RightClick(int buffIndex)
 		{
@@ -28,8 +27,9 @@ namespace GlassesMode.Content.Buffs
 		public override bool PreDraw(SpriteBatch spriteBatch, int type, int buffIndex, ref BuffDrawParams drawParams)
 		{
 			GlassesModePlayer player = Main.LocalPlayer.GetModPlayer<GlassesModePlayer>();
-			player.GlassesBuffToFront();
-			if (player.HasGlassesModeBuff) {
+
+			if (player.hasGlassesBuff) {
+				player.GlassesBuffToFront();
 				// only draw the glassesmode buff
 				if (type == ModContent.BuffType<GlassesModeBuff>()) {
 					player.GlassesBuffParams = drawParams;

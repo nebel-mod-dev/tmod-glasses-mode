@@ -8,53 +8,44 @@ using GlassesMode.Content.Buffs;
 
 namespace GlassesMode.Common.Players
 {
-	// This class showcases things you can do with fishing
 	public class GlassesModePlayer : ModPlayer
 	{
 		public BuffDrawParams GlassesBuffParams;
-		public bool HasGlassesModeBuff { get; private set; }
+		public bool hasGlassesBuff { get; private set; }
 
-		public void ResetEffects()
+		public override void ResetEffects()
 		{
-			HasGlassesModeBuff = false;
+			hasGlassesBuff = false;
 		}
 
-		public void ActivateBuff()
+		public void ActivateEffects()
 		{
-			HasGlassesModeBuff = true;
-			// TODO: make buffs / minimap / hearts / stars / stats (more) transparent
+			hasGlassesBuff = true;
 		}
 
 		/// finds the glasses mode buff in the buff list and swaps it to the very beginning of it
 		public void GlassesBuffToFront()
 		{
-			if (!HasGlassesModeBuff) {
-				return;
-			}
-			int b_type = ModContent.BuffType<GlassesModeBuff>();
+			int buffType = ModContent.BuffType<GlassesModeBuff>();
 			int index = 0;
-			bool found = false;
-			for (index = 0; index < Player.buffType.Length; ++index) {
-				if (Player.buffType[index] == b_type) {
-					found = true;
+			for (; index < Player.buffType.Length; ++index) {
+				if (Player.buffType[index] == buffType) {
+					if (index == 0) {
+						return;
+					}
 					break;
 				}
 			}
-			if (!found || index == 0) {
+			if (Player.buffType.Length <= index) {
 				return;
 			}
-			int b_time = Player.buffTime[index];
-			int other_b_type = Player.buffType[0];
-			int other_b_time = Player.buffTime[0];
-			Player.buffType[0] = b_type;
-			Player.buffTime[0] = b_time;
-			Player.buffType[index] = other_b_type;
-			Player.buffTime[index] = other_b_time;
-		}
-
-		public override void PreUpdate()
-		{
-			GlassesBuffToFront();
+			int buffTime = Player.buffTime[index];
+			int otherBuffType = Player.buffType[0];
+			int otherBuffTime = Player.buffTime[0];
+			Player.buffType[0] = buffType;
+			Player.buffTime[0] = buffTime;
+			Player.buffType[index] = otherBuffType;
+			Player.buffTime[index] = otherBuffTime;
 		}
 	}
 }

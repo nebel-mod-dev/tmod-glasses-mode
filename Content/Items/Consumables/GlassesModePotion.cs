@@ -8,7 +8,8 @@ namespace GlassesMode.Content.Items.Consumables
 	{
 		public string Description;
 		public static int buffTime { get; private set; }
-		public override void SetDefaults() {
+		public override void SetDefaults()
+		{
 			Item.width = 20;
 			Item.height = 26;
 			Item.useStyle = ItemUseStyleID.DrinkLiquid;
@@ -24,8 +25,8 @@ namespace GlassesMode.Content.Items.Consumables
 			// 3 min duration
 			buffTime = Item.buffTime = 3 * 60 * 60;
 		}
-
-		public override void AddRecipes() {
+		public override void AddRecipes()
+		{
 			CreateRecipe()
 				.AddIngredient(ItemID.BottledWater, 1)
 				.AddIngredient(ItemID.Goggles, 1)
